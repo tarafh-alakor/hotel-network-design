@@ -23,7 +23,7 @@ The infrastructure supports both **wired and wireless connectivity** for compute
 ---
 
 # Network Topology
-
+![Network Topology](Screenshot 2026-03-14 045114.png)
 
 ---
 
