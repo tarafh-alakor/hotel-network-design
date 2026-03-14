@@ -23,8 +23,8 @@ The infrastructure supports both **wired and wireless connectivity** for compute
 ---
 
 # Network Topology
-![Network Topology](Screenshot 2026-03-14 045114.png)
-
+[https://github.com/tarafh-alakor/hotel-network-design/blob/53d1cd9bae5e67881c4708a57041fbb9c3309e70/README.md
+](https://github.com/tarafh-alakor/hotel-network-design/blob/53d1cd9bae5e67881c4708a57041fbb9c3309e70/README.md)
 ---
 
 # Network Architecture
