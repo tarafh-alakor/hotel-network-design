@@ -1,121 +1,212 @@
-Design and Implementation of an Hotel System Network Design
+ان\
+---
 
-This project presents the design and implementation of a complete enterprise network infrastructure for a hotel environment using Cisco Packet Tracer. The network is designed to support multiple departments distributed across three floors while ensuring secure communication, network segmentation, dynamic routing, wireless connectivity, and centralized management.
+# Design and Implementation of an Hotel System Network Design
 
-The goal of the project is to build a scalable and secure network architecture that allows all departments to communicate efficiently while maintaining network isolation through VLAN technology.
+This project presents the **design and implementation of a scalable hotel network infrastructure** using Cisco Packet Tracer.
+The network supports multiple departments across three floors while ensuring **secure communication, efficient traffic management, wireless connectivity, and centralized network administration**.
 
-Project Overview
+The design focuses on applying modern networking technologies including **VLAN segmentation, inter-VLAN routing, dynamic routing with OSPF, DHCP automation, secure SSH access, and network security mechanisms**.
 
-The hotel building consists of three floors. Each floor hosts multiple departments that require reliable wired and wireless connectivity. Each floor is connected through its own router and switch. All routers are located in the server room within the IT department and are interconnected using serial links.
+---
 
-Dynamic routing is implemented to allow communication between all networks across the three floors. Each router also acts as the DHCP server for the devices connected within its respective floor.
+# Project Overview
 
-The network supports laptops, desktop computers, printers, mobile devices, and wireless connections.
+The hotel building consists of **three floors**, each containing multiple operational departments.
+Each floor includes its own **router and access switch**, while all routers are centralized in the **IT department server room**.
 
-Network Architecture
-Floor	Departments	Router	Switch
-Floor 1	Reception, Store, Logistics	Router-F1	Switch-F1
-Floor 2	Finance, HR, Sales / Marketing	Router-F2	Switch-F2
-Floor 3	IT, Admin	Router-F3	Switch-F3
+The routers are interconnected using **serial DCE connections** to form the core backbone network.
+All devices within the network obtain IP addresses dynamically through DHCP services configured on the routers.
 
-All routers are installed in the server room located in the IT department.
+The infrastructure supports both **wired and wireless connectivity** for computers, printers, laptops, and mobile devices.
 
-Each floor contains one access switch that connects all devices on that floor including computers, printers, and wireless access points.
+---
 
-Router Interconnection Network
+# Network Topology
 
-The three routers are interconnected using serial DCE cables forming the backbone network of the hotel infrastructure.
 
-Router Connection	Network Address
-Router 1 – Router 2	10.10.10.0 /30
-Router 2 – Router 3	10.10.10.4 /30
-Router 1 – Router 3	10.10.10.8 /30
+---
 
-This interconnection allows dynamic routing between all floors.
+# Network Architecture
 
-VLAN Network Design
+| Floor   | Departments                    | Router    | Switch    |
+| ------- | ------------------------------ | --------- | --------- |
+| Floor 1 | Reception, Store, Logistics    | Router-F1 | Switch-F1 |
+| Floor 2 | Finance, HR, Sales / Marketing | Router-F2 | Switch-F2 |
+| Floor 3 | IT, Admin                      | Router-F3 | Switch-F3 |
 
-Each department is assigned to a separate VLAN to improve security, performance, and traffic management.
+All routers are located in the **IT department server room**, which acts as the network core.
 
-First Floor
-Department	VLAN	Network
-Reception	VLAN 80	192.168.8.0 /24
-Store	VLAN 70	192.168.7.0 /24
-Logistics	VLAN 60	192.168.6.0 /24
-Second Floor
-Department	VLAN	Network
-Finance	VLAN 50	192.168.5.0 /24
-HR	VLAN 40	192.168.4.0 /24
-Sales / Marketing	VLAN 30	192.168.3.0 /24
-Third Floor
-Department	VLAN	Network
-Admin	VLAN 20	192.168.2.0 /24
-IT	VLAN 10	192.168.1.0 /24
+Each floor switch connects the department devices including:
 
-Each department operates within its own broadcast domain while still being able to communicate with other departments through inter-VLAN routing.
+* Desktop computers
+* Printers
+* Wireless access points
 
-Wireless Network
+---
 
-Each floor contains a wireless access point that provides Wi-Fi connectivity for mobile devices such as laptops and smartphones. Wireless users connect to the same departmental networks and receive their IP addresses dynamically through DHCP.
+# Router Interconnection Network
 
-This ensures seamless connectivity for both wired and wireless devices within the hotel environment.
+Routers are connected together using **Serial DCE cables**, creating a routed backbone network.
 
-DHCP Implementation
+| Router Link         | Network Address |
+| ------------------- | --------------- |
+| Router 1 ↔ Router 2 | 10.10.10.0 /30  |
+| Router 2 ↔ Router 3 | 10.10.10.4 /30  |
+| Router 1 ↔ Router 3 | 10.10.10.8 /30  |
 
-Each router functions as the DHCP server for its corresponding floor. Devices connected to the network automatically obtain IP addressing information including the default gateway and network configuration.
+This backbone allows dynamic routing and full communication between all floors.
 
-Dynamic addressing simplifies network management and allows new devices to connect without manual configuration.
+---
 
-Dynamic Routing
+# VLAN Network Design
 
-The network uses OSPF (Open Shortest Path First) as the routing protocol. OSPF dynamically advertises all networks between routers and ensures efficient path selection across the hotel infrastructure.
+Each department is placed within its own VLAN to ensure **traffic isolation, improved performance, and enhanced security**.
 
-This routing mechanism enables communication between all VLAN networks across the three floors.
+## First Floor VLANs
 
-Network Security
+| Department | VLAN ID | Network         |
+| ---------- | ------- | --------------- |
+| Reception  | 80      | 192.168.8.0 /24 |
+| Store      | 70      | 192.168.7.0 /24 |
+| Logistics  | 60      | 192.168.6.0 /24 |
 
-Security measures are implemented to prevent unauthorized access to the network. Port security is configured on the switch located in the IT department.
+## Second Floor VLANs
 
-Only a specific device named Test-PC is allowed to access port Fa0/1. If another device attempts to connect to this port, the port will automatically shut down to protect the network.
+| Department        | VLAN ID | Network         |
+| ----------------- | ------- | --------------- |
+| Finance           | 50      | 192.168.5.0 /24 |
+| HR                | 40      | 192.168.4.0 /24 |
+| Sales / Marketing | 30      | 192.168.3.0 /24 |
 
-This mechanism ensures that only authorized devices can access critical network ports.
+## Third Floor VLANs
 
-Secure Remote Access
+| Department | VLAN ID | Network         |
+| ---------- | ------- | --------------- |
+| Admin      | 20      | 192.168.2.0 /24 |
+| IT         | 10      | 192.168.1.0 /24 |
 
-Secure Shell (SSH) is configured on all routers to allow encrypted remote login for network administrators. This allows administrators to manage and monitor the network securely without requiring physical access to the routers.
+Inter-VLAN routing allows departments to communicate securely across different VLANs.
 
-SSH provides authentication and encrypted communication to protect sensitive administrative sessions.
+---
 
-Network Devices
-Device Type	Purpose
-Routers	Provide inter-VLAN routing and connect all floors
-Switches	Connect devices within each floor
-Wireless Access Points	Provide Wi-Fi connectivity
-Desktop Computers	Department workstations
-Laptops and Smartphones	Wireless user devices
-Printers	Department printing services
-Network Verification
+# Wireless Network Infrastructure
 
-The network was thoroughly tested to ensure full connectivity and proper configuration.
+Each floor includes a **wireless access point** that enables Wi-Fi connectivity for mobile devices such as:
 
-Test	Result
-VLAN segmentation	Successful
-Inter-VLAN communication	Successful
-DHCP address assignment	Successful
-OSPF route propagation	Successful
-Wireless connectivity	Successful
-SSH remote login	Successful
-Port security enforcement	Successful
+* Laptops
+* Smartphones
 
-All devices in the network are able to communicate with each other according to the project requirements.
+Wireless users connect to the same departmental network and receive IP configuration automatically through DHCP.
 
-Project Files
-File	Description
-Packet Tracer File	Complete network topology implementation
-Network Diagram	Visual representation of the network architecture
-Documentation	Detailed explanation of the project design
-Author
+---
 
-Tarafh Al-Akor
+# DHCP Implementation
+
+Each router is configured as the **DHCP server** for the VLANs within its floor.
+
+This enables devices to automatically receive:
+
+| Parameter       | Purpose                           |
+| --------------- | --------------------------------- |
+| IP Address      | Unique device identification      |
+| Default Gateway | Communication with other networks |
+| Network Mask    | Defines network boundaries        |
+| DNS Server      | Domain name resolution            |
+
+Dynamic addressing significantly simplifies network administration.
+
+---
+
+# Dynamic Routing
+
+The network uses the **Open Shortest Path First (OSPF)** routing protocol.
+
+OSPF dynamically advertises all networks across the routers, allowing:
+
+* Efficient route selection
+* Automatic route updates
+* Scalable network growth
+
+This ensures seamless communication between all departments across the hotel.
+
+---
+
+# Network Security
+
+Port security is implemented on the switch in the **IT department**.
+
+Only the authorized device **Test-PC** is allowed to connect to port **Fa0/1**.
+
+| Security Feature    | Description                                                          |
+| ------------------- | -------------------------------------------------------------------- |
+| Sticky MAC Address  | Automatically learns the authorized device MAC address               |
+| Maximum MAC Address | Limits the number of allowed devices                                 |
+| Violation Mode      | Automatically shuts down the port if an unauthorized device connects |
+
+This mechanism prevents unauthorized devices from accessing sensitive network resources.
+
+---
+
+# Secure Remote Management
+
+Secure Shell (**SSH**) is configured on all routers to allow encrypted remote administrative access.
+
+This provides:
+
+* Secure authentication
+* Encrypted management sessions
+* Remote troubleshooting capability
+
+SSH ensures secure remote management of the network infrastructure.
+
+---
+
+# Network Devices
+
+| Device Type            | Function                                |
+| ---------------------- | --------------------------------------- |
+| Routers                | Interconnect floors and perform routing |
+| Switches               | Connect departmental devices            |
+| Wireless Access Points | Provide Wi-Fi connectivity              |
+| Desktop PCs            | Employee workstations                   |
+| Laptops & Smartphones  | Wireless client devices                 |
+| Network Printers       | Department printing services            |
+
+---
+
+# Network Verification
+
+Extensive testing was performed to verify the correct operation of the network.
+
+| Test Scenario             | Result     |
+| ------------------------- | ---------- |
+| VLAN segmentation         | Successful |
+| Inter-VLAN communication  | Successful |
+| DHCP address assignment   | Successful |
+| OSPF route propagation    | Successful |
+| Wireless connectivity     | Successful |
+| SSH remote login          | Successful |
+| Port security enforcement | Successful |
+
+All devices across the network are able to communicate according to the project requirements.
+
+---
+
+# Project Files
+
+| File               | Description                                 |
+| ------------------ | ------------------------------------------- |
+| Packet Tracer File | Complete network topology implementation    |
+| Network Diagram    | Visual representation of the network design |
+| Documentation      | Detailed explanation of the project         |
+
+---
+
+# Author
+
+**Tarafh Al-Akor**
 Information Technology Student
 Network Design and Implementation Project
+
+---
