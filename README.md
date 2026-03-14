@@ -1,4 +1,4 @@
-ان\
+
 ---
 
 # Design and Implementation of an Hotel System Network Design
